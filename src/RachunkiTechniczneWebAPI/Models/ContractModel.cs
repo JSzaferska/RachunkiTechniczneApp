@@ -9,14 +9,15 @@ namespace RachunkiTechniczneWebApi.Models
     public class ContractModel
     {
         
-        public int IdCon { get; set; }
+        public int Id_con { get; set; }
+        public int Id_in { get; set; }
         public string Contract { get; set; }
         public string Contract18 { get; set; }
-        public string ProductCode { get; set; }
+        public string Product_code { get; set; }
         public string Currency { get; set; }
-        public DateTime OpeningDate { get; set; }
-        public DateTime ClosingDate { get; set; }
+        public DateTime Opening_date { get; set; }
 
+        public Inventory Inventory { get; set; }
         public IList<UserConModel> UserCon { get; set; }
     }
 }

@@ -8,8 +8,8 @@ namespace RachunkiTechniczneWebApi.Models
 {
     public class UserConModel
     {
-        public int IdCon { get; set; }
-        public int IdUser { get; set; }
+        public int Id_con { get; set; }
+        public int Id_user { get; set; }
 
         public User User { get; set; }
         public ContractModel Contract { get;set; }

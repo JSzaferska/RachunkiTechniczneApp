@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RachunkiTechniczneWebApi.Interfaces;
+using RachunkiTechniczneWebApi.Interfaces.User;
 using RachunkiTechniczneWebApi.Models;
 
 namespace RachunkiTechniczneWebApi.Controllers
@@ -20,7 +20,7 @@ namespace RachunkiTechniczneWebApi.Controllers
         [HttpGet("{user}")]
         public async Task<IActionResult> Get(string user)
         {
-            var users = await _repository.GetByUserAsync(user);
+            var users = await _repository.GetForUserAsync(user);
             return Ok(users);
         }
 

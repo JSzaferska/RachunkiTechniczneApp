@@ -17,8 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DTOs\" />
-    <Folder Include="Services\" />
+    <Folder Include="Controllers\Admin\" />
+    <Folder Include="Interfaces\Admin\" />
+    <Folder Include="Services\Admin\" />
   </ItemGroup>
 
 </Project>

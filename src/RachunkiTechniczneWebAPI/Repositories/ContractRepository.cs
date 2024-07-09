@@ -5,6 +5,7 @@ using Dapper;
 using System.Diagnostics;
 using static Dapper.SqlMapper;
 using System.ComponentModel.DataAnnotations;
+using RachunkiTechniczneWebApi.Interfaces.User;
 
 namespace RachunkiTechniczneWebApi.Repositories
 {
@@ -39,12 +40,28 @@ namespace RachunkiTechniczneWebApi.Repositories
         }
         */
 
-        public async Task<IEnumerable<ContractModel>> GetByUserAsync(string user)
+        public async Task<IEnumerable<ContractModel>> GetForUserAsync(string user)
         {
-            var sql = "SELECT U.Owner, C.Contract, C.Product_code, C.Currency, C.Opening_date FROM Contracts AS C LEFT JOIN USER_CON AS UC ON C.Id_con = UC.Id_con LEFT JOIN USERS AS U ON UC.Id_user = U.Id_user WHERE U.Login = @User";
+            var sql = @"
+                        SELECT
+                        C.Product_code,
+                        C.Contract,
+                        C.Currency,
+                        I.Date,
+                        I.Balance
+                        FROM CONTRACTS AS C
+                        LEFT JOIN INVENTORY AS I ON C.Id_in = I.Id_in
+             ";
+            
+
             using (var connection = _context.CreateConnection())
             {
-                return await connection.QueryAsync<ContractModel>(sql, new { User = user });
+                return await connection.QueryAsync<ContractModel, Inventory, ContractModel>(sql, 
+                    (contract, inventory) =>
+                    {
+                        contract.Inventory = inventory;
+                        return contract;
+                    }, splitOn: "Date");
             }
         }
 

@@ -8,11 +8,11 @@ namespace RachunkiTechniczneWebApi.Models
 {
     public class User
     {
-        public int IdUser { get; set; }
+        public int Id_user { get; set; }
         public string Owner { get; set; }
         public string Login { get; set; }
         public string Password { get; set; }
-        public bool IsAdmin { get; set; }
+        public bool Is_admin { get; set; }
 
         public IList<UserConModel> UserCon { get; set; }
     }

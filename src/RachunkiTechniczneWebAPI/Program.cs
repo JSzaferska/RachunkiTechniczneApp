@@ -1,8 +1,11 @@
 
 using RachunkiTechniczneWebApi.Dal;
 using RachunkiTechniczneWebApi.Interfaces;
+using RachunkiTechniczneWebApi.Interfaces.User;
 using RachunkiTechniczneWebApi.Models;
 using RachunkiTechniczneWebApi.Repositories;
+using RachunkiTechniczneWebApi.Services.User;
+
 //using RachunkiTechniczneWebApi.Services;
 using Serilog;
 
@@ -16,6 +19,8 @@ builder.Services.AddSingleton<DapperContext>();
 //builder.Services.AddScoped<SearchService>();
 builder.Services.AddScoped<IContractRepository, ContractRepository>();
 builder.Services.AddScoped<IRepository<User>, UserRepository>();
+
+builder.Services.AddScoped<IContractService, ContractService > ();
 
 builder.Services.AddCors(options =>
 {
