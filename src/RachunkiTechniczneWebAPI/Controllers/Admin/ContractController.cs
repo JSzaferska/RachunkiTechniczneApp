@@ -1,10 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RachunkiTechniczneWebApi.Interfaces;
 
-namespace RachunkiTechniczneWebApi.Controllers.User
+namespace RachunkiTechniczneWebApi.Controllers.Admin
 {
     [ApiController]
-    [Route("api/user/contract")]
+    [Route("api/admin/contract")]
     public class ContractController : Controller
     {
        
@@ -18,10 +18,8 @@ namespace RachunkiTechniczneWebApi.Controllers.User
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var user = "LJAKOW";
-            var users = await _service.GetUserContract(user);
-            return Ok(users);
+            var result = await _service.GetAllContract();
+            return Ok(result);
         }
-
     }
 }

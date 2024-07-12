@@ -1,6 +1,6 @@
 ﻿using RachunkiTechniczneWebApi.Models;
 
-namespace RachunkiTechniczneWebApi.Interfaces.User
+namespace RachunkiTechniczneWebApi.Interfaces
 {
     public interface IContractRepository : IRepository<ContractModel>
     {

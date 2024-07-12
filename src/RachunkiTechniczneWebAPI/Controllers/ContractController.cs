@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using RachunkiTechniczneWebApi.Interfaces.User;
+using RachunkiTechniczneWebApi.Interfaces;
 using RachunkiTechniczneWebApi.Models;
 
 namespace RachunkiTechniczneWebApi.Controllers

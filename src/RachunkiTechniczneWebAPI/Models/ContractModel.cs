@@ -16,8 +16,12 @@ namespace RachunkiTechniczneWebApi.Models
         public string Product_code { get; set; }
         public string Currency { get; set; }
         public DateTime Opening_date { get; set; }
+        public int Is_correct { get; set; }
+        public float Correct_balance { get; set; }
+        public string Comment { get; set; }
 
         public Inventory Inventory { get; set; }
+        public User User { get; set; }
         public IList<UserConModel> UserCon { get; set; }
     }
 }
