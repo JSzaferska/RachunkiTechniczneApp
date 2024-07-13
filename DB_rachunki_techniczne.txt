@@ -1,9 +1,9 @@
 CREATE TABLE USERS (
     Id_user INT IDENTITY(1,1) PRIMARY KEY,
-    Owner VARCHAR(50),
-    Login VARCHAR(50),
-    Password VARCHAR(50),
-    Is_admin BIT
+    Owner VARCHAR(50) NOT NULL,
+    Login VARCHAR(50) NOT NULL,
+    Password VARCHAR(50) NOT NULL,
+    Is_admin BIT NOT NULL
 );
 
 INSERT INTO USERS (Owner, Login, Password, Is_admin) VALUES
@@ -28,15 +28,15 @@ INSERT INTO USERS (Owner, Login, Password, Is_admin) VALUES
 
 CREATE TABLE INVENTORY (
     Id_in INT IDENTITY(1,1) PRIMARY KEY,
-    Date DATE,
-    Contrakt18 VARCHAR(18),
+    Date DATE NOT NULL,
+    Contract18 VARCHAR(18),
     Currency VARCHAR(3),
     Account VARCHAR(5),
     SubAccount VARCHAR(6),
     Balance FLOAT
 );
 
-INSERT INTO INVENTORY (Date, Contrakt18, Currency, Account, SubAccount, Balance) VALUES
+INSERT INTO INVENTORY (Date, Contract18, Currency, Account, SubAccount, Balance) VALUES
 ('2024-06-28', '114020040201355387', 'PLN', '55190', '0600', 0.00),
 ('2024-06-28', '114020040201355388', 'PLN', '55190', '0600', 48.99),
 ('2024-06-28', '114020040201355389', 'PLN', '55190', '0600', 4768.85),
@@ -86,10 +86,13 @@ CREATE TABLE CONTRACTS (
     Product_code VARCHAR(4),
     Currency VARCHAR(3),
     Opening_date DATE,
+    Is_correct INT,
+    Correct_balance float NULL,
+    Comment VARCHAR(255)
     FOREIGN KEY (Id_in) REFERENCES INVENTORY(Id_in)
 );
 
-INSERT INTO CONTRACTS (Id_in, Contrakt, Contrakt18, Product_code, Currency, Opening_date) VALUES
+INSERT INTO CONTRACTS (Id_in, Contract, Contract18, Product_code, Currency, Opening_date) VALUES
 (1, '60114020040000300201355387', '114020040201355387', '0289', 'PLN', '2016-01-13'),
 (2, '11114020040000300201355388', '114020040201355388', '0289', 'PLN', '2015-11-17'),
 (3, '20114020040000300201355389', '114020040201355389', '0289', 'PLN', '2015-11-18'),
@@ -131,7 +134,7 @@ INSERT INTO CONTRACTS (Id_in, Contrakt, Contrakt18, Product_code, Currency, Open
 (39, '12114020040000251206477911', '114020041206477911', '1296', 'CHF', '2015-05-02'),
 (40, '22114020040000991273225738', '114020041273225738', '1295', 'USD', '2024-03-22');
 
-CREATE TABLE User_con (
+CREATE TABLE USER_CON (
     Id_con INT,
     Id_user INT,
     FOREIGN KEY (Id_con) REFERENCES CONTRACTS(Id_con),
@@ -179,3 +182,4 @@ INSERT INTO User_con (Id_con, Id_user) VALUES
 (38, 15),
 (39, 16),
 (40, 14);
+
