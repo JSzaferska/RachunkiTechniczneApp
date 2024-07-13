@@ -85,7 +85,7 @@ DoD:
 **[FRONTEND] Stworzenie ekranu modułu rejestrowego**
 Koszt: **L**
 DoD:
-- Stworzenie osobnych ekranów z danymi dla Admina i Usera
+- Stworzenie osobnych ekranów z danymi dla Admina
 - Stworzenie buttonów dla Admina do filtrowania danych
 - Stworzenie buttonów dla Admina do CRUD
 
