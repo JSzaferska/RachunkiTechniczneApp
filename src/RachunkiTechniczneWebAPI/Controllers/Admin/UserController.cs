@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RachunkiTechniczneWebApi.DTOs.Admin;
 using RachunkiTechniczneWebApi.Interfaces;
 using System.Reflection.Metadata.Ecma335;
@@ -8,6 +9,7 @@ namespace RachunkiTechniczneWebApi.Controllers.User
 {
     [ApiController]
     [Route("api/admin/user")]
+    [Authorize(Roles = "admin")]
     public class UserController : Controller
     {
 
@@ -76,8 +78,5 @@ namespace RachunkiTechniczneWebApi.Controllers.User
             }
             return Ok(user);
         }
-
-
-        
     }
 }

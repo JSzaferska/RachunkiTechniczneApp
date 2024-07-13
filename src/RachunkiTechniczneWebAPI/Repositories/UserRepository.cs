@@ -39,6 +39,17 @@ namespace RachunkiTechniczneWebApi.Repositories
             }
         }
 
+        public async Task<User> GetByLoginAsync(string login)
+        {
+            var sql = @"SELECT * 
+                        FROM Users
+                        WHERE Login = @Login";
+            using (var connection = _context.CreateConnection())
+            {
+                return await connection.QuerySingleOrDefaultAsync<User>(sql, new { Login = login });
+            }
+        }
+
         public async Task<int> AddUserAsync(User entity)
 		{
 			var sql = @"INSERT INTO Users
@@ -72,16 +83,6 @@ namespace RachunkiTechniczneWebApi.Repositories
                 var affectedRows = await connection.ExecuteAsync(sql, new { Id = id });
                 return affectedRows > 0;
             }
-        }
-
-        public Task<bool> UpdateAsync(int id, bool paid)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> DeleteAsync(int id)
-        {
-            throw new NotImplementedException();
         }
     }
 }

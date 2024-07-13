@@ -1,25 +1,23 @@
-import React from "react";
-import {getContractsList} from "../../../api/index.js";
+import React, {useEffect, useState} from "react";
+import {getContractsList, getContractsRegistryListAdmin, loggout} from "../../../api/index.js";
+import {useNavigate} from "react-router-dom";
 
-class ReportView extends React.Component {
-    state = {
-        contracts: [],
-    };
+const ReportView = () => {
+    const [contracts, setContracts] = useState([]);
 
-    parseContracts = (data) => {
+    const parseContracts = (data) => {
         console.log(data);
-        this.setState(prevState => {
-            return {
-                contracts: data
-            }
-        });
+        setContracts(data);
     }
 
-    componentDidMount() {
-        getContractsList(this.parseContracts);
-    }
+    const navigate = useNavigate();
 
-    formatDate(string) {
+    useEffect(() => {
+        return  getContractsList(parseContracts);
+    }, []);
+
+
+    const formatDate = (string) => {
         var options = {
             year: 'numeric',
             month: 'long',
@@ -28,7 +26,7 @@ class ReportView extends React.Component {
         return new Date(string).toLocaleDateString([], options);
     }
 
-    render() {
+
         return (
             <>
                 <table>
@@ -42,35 +40,36 @@ class ReportView extends React.Component {
                         <th>Czy saldo się zgadza?</th>
                         <th>Saldo prawidłowe</th>
                         <th>Uwagi</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    {this.state.contracts.map(contract => (
+                    {contracts.map(contract => (
                         <tr>
-                            <th>{this.formatDate(contract.date)}</th>
+                            <th>{formatDate(contract.date)}</th>
                             <th>{contract.contract}</th>
                             <th>{contract.productCode}</th>
                             <th>{contract.currency}</th>
                             <th>{contract.balance}</th>
+                            <th>{contract.isCorrect}</th>
+                            <th>{contract.correctBalance}</th>
+                            <th>{contract.comment}</th>
+                            <th>
+                                <td>
+                                    <button onClick={() => {
+                                        navigate("answer", {state: {id: contract.contractId}})
+                                    }}>Odpowiedz
+                                    </button>
+                                </td>
+                            </th>
                         </tr>
                     ))}
                     </tbody>
                 </table>
-                <form>
-                    <label htmlFor="select">Pole select</label>
-                    <select id="select">
-                        <option>Tak</option>
-                        <option>Nie</option>
-                    </select>
-                    <label htmlFor="number">Saldo prawidłowe</label>
-                    <input type="number" id="number"/>
-                    <label htmlFor="text">Uwagi</label>
-                    <textarea id="text"></textarea>
-                </form>
-                {JSON.stringify(this.state.contracts)}
+                <button onClick={() => loggout()}>Wyloguj</button>
             </>
         );
     }
-}
+
 
 export default ReportView;

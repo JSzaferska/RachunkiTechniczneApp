@@ -44,6 +44,19 @@ namespace RachunkiTechniczneWebApi.Services
             return userModel;
         }
 
+        public async Task<UserDto> GetByLogin(string login)
+        {
+            var user = await _userRepository.GetByLoginAsync(login);
+            var userModel = new UserDto()
+            {
+                Owner = user.Owner,
+                Login = user.Login,
+                Password = user.Password,
+                IsAdmin = user.Is_admin
+            };
+            return userModel;
+        }
+
         public async Task<int> AddUserAsync(UserDto userDto)
         {
             var userModel = new User
@@ -63,7 +76,7 @@ namespace RachunkiTechniczneWebApi.Services
                 Id_user = userDto.UserId,
                 Owner = userDto.Owner,
                 Password = userDto.Password,
-                Is_admin = userDto.IsAdmin
+                Is_admin = userDto.IsAdmin,
             };
             return await _userRepository.UpdateAsync(userModel);
         }

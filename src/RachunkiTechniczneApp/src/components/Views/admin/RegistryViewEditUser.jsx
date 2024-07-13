@@ -1,12 +1,13 @@
-import React, {useState} from "react";
-import {addUser} from "../../../api/index.js";
-import {useNavigate} from "react-router-dom";
+import React, {useEffect, useState} from "react";
+import {addUser, getUser, getUsersRegistryListAdmin} from "../../../api/index.js";
+import {useLocation, useNavigate, useParams} from "react-router-dom";
 
 const RegistryViewAddUser = () => {
     const [data, setData] = useState({
     });
 
     const navigate = useNavigate();
+    const { id } = useLocation().state;
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -15,6 +16,22 @@ const RegistryViewAddUser = () => {
             [name]: value,
         });
     };
+
+    const onLoadData = (user) => {
+        setData(
+            {
+                textOwner: user.owner,
+                textLogin: user.login,
+                textPassword: user.password,
+                selectRole: user.isAdmin ? "Admin" : "Użyszkodnik",
+            }
+        )
+    };
+
+    useEffect(() => {
+        console.log(id);
+        return getUser(id, onLoadData);
+    }, []);
 
     const handleAddButton = async (e, data) => {
         e.preventDefault();
@@ -58,7 +75,7 @@ const RegistryViewAddUser = () => {
                             <option>Admin</option>
                         </select>
                     </div>
-                    <button type={"submit"}>Dodaj</button>
+                    <button type={"submit"}>Zaktualizuj</button>
                 </form>
             </main>
         </>);

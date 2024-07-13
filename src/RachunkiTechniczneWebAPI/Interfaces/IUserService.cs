@@ -7,6 +7,7 @@ namespace RachunkiTechniczneWebApi.Interfaces
     {
         Task<List<UserDto>> GetAllUser();
         Task<UserDto> GetById(int id);
+        Task<UserDto> GetByLogin(string login);
         Task<int> AddUserAsync(UserDto userDto);
         Task<bool> UpdateAsync(UserDto userDto);
         Task<bool> DeleteUserAsync(int id);

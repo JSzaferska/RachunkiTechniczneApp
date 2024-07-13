@@ -1,16 +1,18 @@
 import React from "react";
-import {getContractsList} from "../../../api/index.js";
+import {useNavigate} from "react-router-dom";
+import {loggout} from "../../../api/index.js";
 
-class ChoiceView extends React.Component {
+const ChoiceView = () => {
+    const navigate = useNavigate();
 
-    render() {
-        return (
-            <>
-                <h1>Wybierz moduł:</h1>
-                <button>Rejestr rachunków</button>
-                <button>Raport dla rachunków</button>
-            </>
-        );
-    }
+    return (
+        <>
+            <h1>Wybierz moduł:</h1>
+            <button onClick={() => navigate("registry")}>Rejestr rachunków</button>
+            <button onClick={() => navigate("report")}>Raport dla rachunków</button>
+            <button onClick={() => navigate("users")}>Użytkownicy</button>
+            <button onClick={() => loggout()}>Wyloguj</button>
+        </>
+    );
 }
 export default ChoiceView;
